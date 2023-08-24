@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProduct, updateProduct } from "../../../App/features/productsSlice";
+import { collection, addDoc, QuerySnapshot, query, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from '../../../Database/firebase';
 
 const ProductsTable = ({ currentProducts }) => {
   const dispatch = useDispatch();
@@ -19,8 +21,8 @@ const ProductsTable = ({ currentProducts }) => {
     }
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteProduct({id}))
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "newProduct", id));
   }
 
   return (
@@ -39,7 +41,7 @@ const ProductsTable = ({ currentProducts }) => {
           </thead>
           <tbody>
             {currentProducts.map((product) => {
-              const { id, image, title, category, price, status } = product;
+              const { id, image, productName, subcategory, price, status } = product;
 
               return (
                 <tr key={id}>
@@ -54,10 +56,10 @@ const ProductsTable = ({ currentProducts }) => {
                       >
                         <img className="mh-100 mw-100" src={image} alt="" />
                       </span>
-                      <span className="fw-bold ms-1 text-start">{title}</span>
+                      <span className="fw-bold ms-1 text-start">{productName}</span>
                     </div>
                   </td>
-                  <td>{category}</td>
+                  <td>{subcategory}</td>
                   <td>{price}</td>
                   <td className="fw-bold">
                     <div className="ms-3 form-check form-switch d-flex justify-content-start align-items-center">
@@ -91,7 +93,7 @@ const ProductsTable = ({ currentProducts }) => {
                       >
                         view
                       </Link>
-                      { adminData.userType === 'super admin' && (
+                      { adminData.userType != 'super admin' && (
                         <button
                          className="btn btn-sm btn-danger ms-1"
                          onClick={()=> handleDelete(id)}

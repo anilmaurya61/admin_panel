@@ -72,7 +72,7 @@
       "state": "state name",
       "country": "Virtual",
       "image": "https://res.cloudinary.com/djorpdesu/image/upload/v1674138093/gdybotabhkk6enkuvlgd.jpg",
-      "status": "active",
+      "status": "blocked",
       "id": 2
     },
     {
@@ -143,14 +143,14 @@
       "id": 4
     },
     {
-      "category": "Mobiles",
-      "status": "hidden",
-      "id": 6
+      "category": "Pet",
+      "status": "active",
+      "id": 5
     },
     {
-      "category": "Cars",
-      "status": "hidden",
-      "id": 7
+      "category": "gg",
+      "status": "active",
+      "id": 6
     }
   ],
   "coupon": [
@@ -175,8 +175,14 @@
     {
       "coupon": "Logic20",
       "discount": 20,
-      "status": "active",
+      "status": "deactive",
       "id": 4
+    },
+    {
+      "coupon": "Friday_23",
+      "discount": 5,
+      "status": "active",
+      "id": 5
     }
   ],
   "products": [
@@ -247,7 +253,7 @@
       "price": 9.99,
       "category": "jwelary",
       "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-      "status": "active",
+      "status": "hidden",
       "id": 7
     },
     {
@@ -354,7 +360,7 @@
       "id": 18,
       "title": "MBJ Short Sleeve ",
       "brand": "MBJ",
-      "price": 9.85,
+      "price": 789,
       "description": "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
       "category": "women's clothing",
       "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
@@ -367,8 +373,508 @@
       "price": 7.95,
       "category": "women's clothing",
       "image": "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
-      "status": "active",
+      "status": "hidden",
       "id": 19
+    },
+    {
+      "title": "Hello",
+      "description": "This is forst Product",
+      "brand": "eff",
+      "status": "hidden",
+      "category": "electronics",
+      "price": 45,
+      "image": "",
+      "id": 20
+    },
+    {
+      "title": "jhbjr",
+      "description": "ejhrjerh",
+      "brand": "ejrhgbejhr",
+      "status": "hidden",
+      "category": "electronics",
+      "price": 123,
+      "image": "",
+      "id": 21
+    },
+    {
+      "title": "wkejhker",
+      "description": "wurgtyur",
+      "brand": "stedt",
+      "status": "active",
+      "category": "electronics",
+      "price": 876,
+      "image": "",
+      "id": 22
+    },
+    {
+      "title": "First Product",
+      "description": "Thist idvuv",
+      "brand": "Hero",
+      "status": "active",
+      "category": "electronics",
+      "price": 123,
+      "image": "",
+      "id": 23
+    },
+    {
+      "title": "hello",
+      "description": "hejrhe",
+      "brand": "ejrhejrh",
+      "status": "hidden",
+      "category": "jwelary",
+      "price": 2324,
+      "image": "",
+      "id": 24
+    },
+    {
+      "title": "rfsgds",
+      "description": "fgdfg",
+      "brand": "sfgd",
+      "status": "hidden",
+      "category": "men's clothing",
+      "price": 312,
+      "image": "",
+      "id": 25
+    },
+    {
+      "title": "wrfw",
+      "description": "wqerw",
+      "brand": "werwer",
+      "status": "hidden",
+      "category": "men's clothing",
+      "price": 123,
+      "image": "",
+      "id": 26
+    },
+    {
+      "title": "hejhf",
+      "description": "jhefbwje",
+      "brand": "jwhefbwjeh",
+      "status": "active",
+      "category": "women's clothing",
+      "price": 6776,
+      "image": "",
+      "id": 27
+    },
+    {
+      "title": "wedf",
+      "description": "sdfsf",
+      "brand": "sfdsf",
+      "status": "hidden",
+      "category": "men's clothing",
+      "price": 4342,
+      "image": "",
+      "id": 28
+    },
+    {
+      "title": "Tilrnkjeb",
+      "description": "jwebfjher",
+      "brand": "jhrfbjrh",
+      "status": "active",
+      "category": "men's clothing",
+      "price": 1234,
+      "image": "",
+      "id": 29
+    },
+    {
+      "title": "heelooo",
+      "description": "kjdfbv bkjbfvdfv",
+      "status": "hidden",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "cY52xQXelmxZz2YCZ5DY",
+      "price": [
+        8,
+        7,
+        8
+      ],
+      "image": "",
+      "id": 30
+    },
+    {
+      "title": "eeeeeeeeeee",
+      "description": "eehhhhhhhhhhhhh",
+      "status": "hidden",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "cY52xQXelmxZz2YCZ5DY",
+      "price": [
+        7,
+        8
+      ],
+      "image": "",
+      "id": 31
+    },
+    {
+      "title": "aaaaaaaaaaaaaa",
+      "description": "jgwdvfsfvdh",
+      "status": "hidden",
+      "subcategory": "NculUlWX3LrLVO9Wb0Cl",
+      "price": [
+        1,
+        2,
+        3
+      ],
+      "image": "",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "id": 32
+    },
+    {
+      "title": "rgdg",
+      "description": "dgrrrrrrr",
+      "status": "hidden",
+      "subcategory": "NculUlWX3LrLVO9Wb0Cl",
+      "price": [
+        3,
+        4
+      ],
+      "image": "",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "id": 33
+    },
+    {
+      "title": "abcvddb",
+      "description": "hello",
+      "status": "hidden",
+      "category": "",
+      "subcategory": "Dog Mouth Freshner Spray,",
+      "price": [
+        1,
+        2
+      ],
+      "image": "",
+      "id": 34
+    },
+    {
+      "title": "wwwwwwwwwwwwwwww",
+      "description": "wwwwwwwwwwwww",
+      "status": "hidden",
+      "category": "n4wHQgpSXIJgLsaHlY4r",
+      "subcategory": "Dog Mouth Freshner Spray,",
+      "price": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "image": "",
+      "id": 35
+    },
+    {
+      "title": "lllllllluuuuuuuuuuuuullllllll",
+      "description": "jjjjjjjjjjkfsbkjdbkjs",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Nursing",
+      "productQuantity": "10",
+      "productUnit": "1 gm",
+      "price": [
+        2,
+        3
+      ],
+      "image": "",
+      "id": 36
+    },
+    {
+      "title": "hgvhg",
+      "description": "vsdhgvfhsgvf",
+      "status": "hidden",
+      "category": "sm02hSYlmN2uvSuBHSaF",
+      "subcategory": "Hubba Bubba ",
+      "productQuantity": "12",
+      "productUnit": "2 gm",
+      "price": [
+        1,
+        2
+      ],
+      "image": "",
+      "id": 37
+    },
+    {
+      "title": "lllllllllooooooooooooool",
+      "description": "sssssssssssssssss",
+      "status": "hidden",
+      "category": "n4wHQgpSXIJgLsaHlY4r",
+      "subcategory": "PEDIGREE",
+      "productQuantity": "12",
+      "productUnit": "1 gm",
+      "price": [
+        1,
+        2
+      ],
+      "image": "",
+      "id": 38
+    },
+    {
+      "title": "weweewewwe",
+      "description": "wewewewewe",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "MamyPoko Pants Standard - L",
+      "productQuantity": "11",
+      "productUnit": "1gm",
+      "price": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "discount": [
+        2
+      ],
+      "image": "",
+      "id": 39
+    },
+    {
+      "title": "firshb",
+      "description": "bhjrbfs sjehkhr whewi r",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Nursing",
+      "productQuantity": "10",
+      "productUnit": "5gm",
+      "price": [
+        2,
+        3
+      ],
+      "discount": "2",
+      "image": "",
+      "id": 40
+    },
+    {
+      "title": "t",
+      "description": "h",
+      "status": "active",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "butter",
+      "productQuantity": "12",
+      "productUnit": "2122",
+      "price": [
+        3,
+        4,
+        5,
+        4,
+        6,
+        5,
+        4,
+        6
+      ],
+      "discount": "23523",
+      "image": "",
+      "id": 41
+    },
+    {
+      "title": "werwerwr",
+      "description": "werwwrsfsef",
+      "status": "active",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Nursing",
+      "productQuantity": "10",
+      "productUnit": "12gm",
+      "price": [
+        1,
+        2,
+        2,
+        5
+      ],
+      "discount": [
+        12423245
+      ],
+      "image": "",
+      "id": 42
+    },
+    {
+      "title": "tests",
+      "description": "anil Maurya",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Baby massage oil",
+      "productQuantity": "12",
+      "productUnit": "1 Box",
+      "price": [
+        1267253
+      ],
+      "discount": [
+        231
+      ],
+      "image": "",
+      "id": 43
+    },
+    {
+      "title": "Aalu",
+      "description": "Tamato",
+      "status": "hidden",
+      "category": "n4wHQgpSXIJgLsaHlY4r",
+      "subcategory": "Pet Toys",
+      "productQuantity": "12",
+      "productUnit": "5gm",
+      "price": [
+        123
+      ],
+      "discount": [
+        2
+      ],
+      "image": "",
+      "id": 44
+    },
+    {
+      "title": "Tamato",
+      "description": "red",
+      "status": "active",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "Egg",
+      "productQuantity": "10",
+      "productUnit": "1kg",
+      "price": [
+        400
+      ],
+      "discount": [
+        3
+      ],
+      "image": "",
+      "id": 45
+    },
+    {
+      "title": "Aaluu",
+      "description": "Sold By - Anuj Agri Farm , Uttar Pradesh",
+      "status": "active",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "Bread",
+      "productQuantity": "2",
+      "productUnit": "2kg",
+      "price": [
+        200
+      ],
+      "discount": [
+        3
+      ],
+      "image": "",
+      "id": 46
+    },
+    {
+      "title": "www",
+      "description": "w",
+      "status": "active",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "butter",
+      "productQuantity": "12",
+      "productUnit": "12",
+      "price": [
+        12
+      ],
+      "discount": [
+        12
+      ],
+      "image": "",
+      "id": 47
+    },
+    {
+      "title": "qe",
+      "description": "qe",
+      "status": "active",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "MamyPoko Pants Standard - L",
+      "productQuantity": "23",
+      "productUnit": "233",
+      "price": [
+        23
+      ],
+      "discount": [
+        3
+      ],
+      "image": "",
+      "id": 48
+    },
+    {
+      "title": "rgd",
+      "description": "hgvh",
+      "status": "active",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "NOVEL Baby Wipes 80 Sheets pack of 6",
+      "productQuantity": "323",
+      "productUnit": "343",
+      "price": [
+        12
+      ],
+      "discount": [
+        2
+      ],
+      "image": "",
+      "id": 49
+    },
+    {
+      "title": "erw",
+      "description": "bjhbjhb",
+      "status": "active",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "Cheese",
+      "productQuantity": "56",
+      "productUnit": "56",
+      "price": [
+        56
+      ],
+      "discount": [
+        56
+      ],
+      "image": "",
+      "id": 50
+    },
+    {
+      "title": "Tamato",
+      "description": "The tomato is the edible berry of the plant Solanum lycopersicum, commonly known as the tomato plant. ",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Nursing",
+      "productQuantity": "10",
+      "productUnit": "1Kg",
+      "price": [
+        400
+      ],
+      "discount": [
+        45
+      ],
+      "image": "",
+      "id": 51
+    },
+    {
+      "title": "Aaalu",
+      "description": "npx json-server --watch src/data/db.json --port 8000",
+      "status": "hidden",
+      "category": "Nm8NRKQ8CqKRLxPjgh02",
+      "subcategory": "Baby massage oil",
+      "productQuantity": "10",
+      "productUnit": "1 Box",
+      "price": [
+        100
+      ],
+      "discount": [
+        10
+      ],
+      "image": "",
+      "id": 52
+    },
+    {
+      "title": "Buttttttrrrrrrrr",
+      "description": "To delete documents in Firestore, we'll update the handleDeletingTicket() function in the TicketControl component. ",
+      "status": "hidden",
+      "category": "FioEcXhuvgp2ZOs5E5x5",
+      "subcategory": "butter",
+      "productQuantity": "2",
+      "productUnit": "1gm",
+      "price": [
+        12
+      ],
+      "discount": [
+        2
+      ],
+      "image": "",
+      "id": 53
     }
   ],
   "orders": [
@@ -493,7 +999,7 @@
           "total": 114
         }
       ],
-      "status": "active",
+      "status": "pending",
       "id": 2
     },
     {
@@ -717,7 +1223,7 @@
           "total": 64
         }
       ],
-      "status": "pending",
+      "status": "active",
       "id": 6
     }
   ]

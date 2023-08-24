@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../Api/api";
 import Spiner from "../../Components/Spiner";
@@ -7,8 +7,56 @@ import Style from "../../Assets/Admin/css/orderView.module.css";
 import { updateOrderStatus } from "../../App/features/ordersSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { db } from '../../Database/firebase';
+import { collection, doc, getDocs } from "firebase/firestore";
 
 const OrderView = () => {
+
+
+
+  const [allOrders, setAllOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const ordersCollectionRef = collection(db, 'Order');
+        
+        console.log('Fetching all orders...');
+        
+        const ordersSnapshot = await getDocs(ordersCollectionRef);
+        const orderIds = ordersSnapshot.docs.map(doc => doc.id);
+        console.log('Fetched orders:', orderIds);
+
+        // const allPromises = ordersSnapshot.docs.map(async orderDoc => {
+        //   const userOrdersRef = collection(orderDoc.ref, 'MyOrders');
+        //   const userOrdersSnapshot = await getDocs(userOrdersRef);
+        //   console.log('Fetched user orders:', userOrdersSnapshot.docs.length, 'documents');
+        //   const userOrders = userOrdersSnapshot.docs.map(orderDoc => orderDoc.data());
+        //   return userOrders;
+        // }
+        // );
+
+        // const allUserOrders = await Promise.all(allPromises);
+        // const mergedOrders = allUserOrders.flat();
+
+        // console.log('Merged orders:', mergedOrders);
+        // setAllOrders(mergedOrders);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+  
+
+
+
+
+
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();

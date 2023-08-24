@@ -1,88 +1,154 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../Api/api";
 import { addProduct } from "../../App/features/productsSlice";
 import useFetch from "../../Hooks/useFetch";
+import handleAddProduct from "../../Database/addProduct";
+import { db } from '../../Database/firebase';
+import { collection, addDoc, QuerySnapshot, query, getDocs } from "firebase/firestore";
+import firebase from "firebase/app";
+
 
 const ProductAdd = () => {
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-    const { data: category } = useFetch(`${BASE_URL}/category`)
+  // const { data: category } = useFetch(`${BASE_URL}/category`)
+  // Assuming you have already initialized Firebase
 
-    const initialState = { title:'', description:'', brand:'', status :'', category : '' }
 
-    const [ productData, setProductData ] = useState(initialState);
-    const [ price, setPrice ] = useState('')
-    const [ image, setImage ] = useState('')
+  const [categoryData, setCategoryData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [filteredSubCategories, setFilteredSubCategories] = useState([]);
 
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setProductData(prev => ({...prev, [name]: value}))
-    }
-
-    const handlePriceChange = (e) => {
-        setPrice(e.target.value)
-    }
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0]
-        const formData = new FormData()
-        formData.append("file", file)
-        formData.append("upload_preset", `${process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET}`)
-
-        toast.dismiss();
-        toast.info('uploading image....')
-    
-        fetch( `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_UPLOAD_API_KEY}/image/upload`, {
-            method: 'POST',
-            body: formData,
+  const getCategoryData = async () => {
+    // Fetch data from Firebase and set it in the state
+    try {
+      await getDocs(collection(db, "category"))
+        .then((QuerySnapshot) => {
+          const data = QuerySnapshot.docs
+            .map((doc) => ({ ...doc.data(), id: doc.id }));
+          setCategoryData(data);
+          // console.log(data);
         })
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+      setCategoryData([]);
+    }
+  };
+
+  const handleCategoryChange = async (event) => {
+    const selectedCategoryId = event.target.value;
+    setSelectedCategory(selectedCategoryId);
+
+    try {
+      // Fetch subcategories based on the selected category
+      const subcategorySnapshot = await getDocs(collection(db, 'category', selectedCategoryId, 'subCategory'));
+      const subcategoryData = subcategorySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setFilteredSubCategories(subcategoryData);
+      console.log(subcategoryData);
+    } catch (error) {
+      console.error('Error fetching subcategory data:', error);
+      setFilteredSubCategories([]);
+    }
+  };
+
+  useEffect(() => {
+    // Call the fetchData function when the component mounts
+    getCategoryData();
+  }, []);
+
+  const combinedChangeHandler = (event) => {
+    handleChange(event);
+    handleCategoryChange(event);
+    // handlecategoryChange(event);
+  };
+
+  const initialState = { title: '', description: '', status: '', category: '', subcategory: '', productQuantity: '', productUnit:''};
+
+  const [productData, setProductData] = useState(initialState);
+  const [price, setPrice] = useState([])
+  const [discount, setdiscount] = useState([])
+  const [image, setImage] = useState('')
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setProductData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handlePriceChange = (e) => {
+    const priceValue = e.target.value;
+    const priceInteger = parseInt(priceValue, 10);
+    const priceArray = [priceInteger];
+    setPrice(priceArray)
+  }
+
+  const handlediscountChange = (e) => {
+    const discountValue = e.target.value;
+    const discountInteger = parseInt(discountValue, 10);
+    const discountArray = [discountInteger];
+    setdiscount(discountArray);
+  }
+  // const handleImageChange = (e) => {
+  //     const file = e.target.files[0]
+  //     const formData = new FormData()
+  //     formData.append("file", file)
+  //     formData.append("upload_preset", `${process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET}`)
+
+  //     toast.dismiss();
+  //     toast.info('uploading image....')
+
+  //     fetch( `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_UPLOAD_API_KEY}/image/upload`, {
+  //         method: 'POST',
+  //         body: formData,
+  //     })
+  //     .then(res => {
+  //         if(!res.ok){
+  //             throw new Error(res.statusText)
+  //         } else {
+  //             toast.dismiss()
+  //             toast.success('Image Uploaded')
+  //             return res.json()
+  //         }
+  //     })
+  //     .then(data => {
+  //         setImage(data.url)
+  //     })
+  //     .catch(error => {
+  //         toast.dismiss();
+  //         toast.error('image not uploaded')
+  //         console.log(error)
+  //     })
+  //   };
+
+ 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const productDetails = { ...productData, price: Array.from(price, Number),discount, image};
+    handleAddProduct(productDetails);
+    if (1 || image) {
+      dispatch(addProduct({ productDetails }))
+        .unwrap(unwrapResult)
         .then(res => {
-            if(!res.ok){
-                throw new Error(res.statusText)
-            } else {
-                toast.dismiss()
-                toast.success('Image Uploaded')
-                return res.json()
-            }
+          if (res.status) {
+            setProductData(initialState);
+            navigate(-1)
+          }
         })
-        .then(data => {
-            setImage(data.url)
-        })
-        .catch(error => {
-            toast.dismiss();
-            toast.error('image not uploaded')
-            console.log(error)
-        })
-      };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const productDetails = { ...productData, price: Number(price), image};
-
-        if (image){
-          dispatch(addProduct({productDetails}))
-          .unwrap(unwrapResult)
-          .then( res => {
-            if(res.status){
-              setProductData(initialState);
-              navigate(-1)
-            }
-          })
-        } else {
-          toast.dismiss()
-          toast.error('no image found')
-        }
-        
+    } else {
+      toast.dismiss()
+      toast.error('no image found')
     }
+
+  }
 
 
   return (
@@ -95,7 +161,7 @@ const ProductAdd = () => {
           <div className="h4 text-center mb-3">Add Product</div>
           <div className="col-12">
             <label htmlFor="title" className="form-label fw-bold">
-                Title :
+              Title :
             </label>
             <input
               type="text"
@@ -109,7 +175,7 @@ const ProductAdd = () => {
           </div>
           <div className="col-12">
             <label htmlFor="description" className="form-label fw-bold">
-                Description :
+              Description :
             </label>
             <textarea
               type="text"
@@ -121,23 +187,10 @@ const ProductAdd = () => {
               required
             />
           </div>
-          <div className="col-md-6">
-            <label htmlFor="brand" className="form-label fw-bold">
-                Brand :
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="brand"
-              name="brand"
-              value={productData.brand}
-              onChange={handleChange}
-              required
-            />
-          </div>
+         
           <div className="col-md-6">
             <label htmlFor="price" className="form-label fw-bold">
-                Price :
+              Price :
             </label>
             <input
               type="number"
@@ -150,20 +203,62 @@ const ProductAdd = () => {
             />
           </div>
           <div className="col-md-6">
+            <label htmlFor="brand" className="form-label fw-bold">
+              Discount :
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="price"
+              name="price"
+              value={productData.discount}
+              onChange={handlediscountChange}
+              // required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="brand" className="form-label fw-bold">
+              Product Quantity :
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="price"
+              name="productQuantity"
+              value={productData.productQuantity}
+              onChange={handleChange}
+              // required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="brand" className="form-label fw-bold">
+              Product Unit :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="price"
+              name="productUnit"
+              value={productData.productUnit}
+              onChange={handleChange}
+              // required
+            />
+          </div>
+          <div className="col-md-6">
             <label htmlFor="status" className="form-label fw-bold">
               Status :
             </label>
             <select
-                className="form-select" 
-                id="status"
-                value={productData.status}
-                name="status"
-                onChange={handleChange}
-                required
+              className="form-select"
+              id="status"
+              value={productData.status}
+              name="status"
+              onChange={handleChange}
+              required
             >
-                <option value="">-- Select Status --</option>
-                <option value="active">Active</option>
-                <option value="hidden">Hidden</option>
+              <option value="">-- Select Status --</option>
+              <option value="active">Active</option>
+              <option value="hidden">Hidden</option>
             </select>
           </div>
           <div className="col-md-6">
@@ -171,20 +266,42 @@ const ProductAdd = () => {
               Category :
             </label>
             <select
-                className="form-select" 
-                id="category"
-                value={productData.category}
-                name="category"
-                onChange={handleChange}
-                required
+              className="form-select"
+              id="category"
+              value={productData.category}
+              name="category"
+              onChange={combinedChangeHandler}
+              required
             >
-                <option value="">-- Select Category --</option>
-                { category && category.map(cat => {
-                    const {category, id, status} = cat;
-                    return status === "active" ? (
-                        <option key={id} value={category}>{category}</option>
-                    ) : null;
-                })}
+              <option value="">-- Select Category --</option>
+              {categoryData.map(cat => {
+                const { categoryName, id } = cat;
+                return (
+                  <option key={id} value={id}>
+                    {categoryName}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="category" className="form-label fw-bold">
+              SubCategory :
+            </label>
+            <select
+              className="form-select"
+              id="category"
+              value={productData.subcategory}
+              name="subcategory"
+              onChange={handleChange}
+              required
+            >
+              <option value="">-- Select SubCategory --</option>
+              {filteredSubCategories.map(subCat => (
+                <option key={subCat.id} value={subCat.sub_name}>
+                  {subCat.sub_name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="col-md-6">
@@ -195,7 +312,7 @@ const ProductAdd = () => {
               type="file"
               className="form-control"
               id="image"
-              onChange={handleImageChange}
+              // onChange={handleImageChange}
               required
             />
           </div>

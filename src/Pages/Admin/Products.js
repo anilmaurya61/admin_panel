@@ -6,11 +6,14 @@ import AddLinkButton from "../../Components/Admin/AddLinkButton";
 import Search from "../../Components/Admin/Search";
 import Pagination from "../../Components/Pagination";
 import ProductsTable from "../../Components/Admin/Products/ProductsTable";
+import { db } from '../../Database/firebase';
+import { collection, addDoc, QuerySnapshot, query, getDocs } from "firebase/firestore";
 
 const Products = () => {
   const dispatch = useDispatch();
 
   const { products, error } = useSelector((state) => state.products);
+  const [productData, setproductData] = useState([]);
 
   useEffect(() => {
     const controler = new AbortController();
@@ -23,11 +26,32 @@ const Products = () => {
     };
   }, [dispatch]);
 
+  const getproductData = async () => {
+    // Fetch data from Firebase and set it in the state
+    try {
+      await getDocs(collection(db, "newProduct"))
+        .then((QuerySnapshot) => {
+          const data = QuerySnapshot.docs
+            .map((doc) => ({ ...doc.data(), id: doc.id }));
+          setproductData(data);
+          console.log(data);
+        })
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+      setproductData([]);
+    }
+  };
+
+  useEffect(() => {
+    // Call the fetchData function when the component mounts
+    getproductData();
+  }, []);
+
   const [productsData, setProductsData] = useState([]);
 
   //  Pagination
   const [ page, setPage ] = useState(1)
-  const dataLimit = 4;
+  const dataLimit = 10;
   const lastIndex = page*dataLimit;
   const firstIndex = lastIndex - dataLimit;
   const totalData = productsData.length;
@@ -74,7 +98,7 @@ const Products = () => {
               <div className="card-body">
                 {products.length ?(
                   <>
-                    <ProductsTable currentProducts={currentProducts} />
+                    <ProductsTable currentProducts={productData} />
                     <Pagination page={page} setPage={setPage} total={totalData} limit={dataLimit} />
                   </>
                 ) : null}
